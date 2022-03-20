@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CurrencyTrader.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,15 +26,7 @@ namespace CurrencyTrader.Views
         public CalculatorPageView()
         {
             this.InitializeComponent();
-        }
-        private void TextBoxFirstCurr_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSecondCurr_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            DataContext = new CalculatorViewModel();
         }
 
     }

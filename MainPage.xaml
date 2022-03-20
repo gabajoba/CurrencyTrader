@@ -6,10 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:CurrencyTrader.Views"
+    xmlns:viewmodels="using:CurrencyTrader.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Frame>
+    <!--<Frame>
         <views:CalculatorPageView x:Name="CalculatorPage"/>
-    </Frame>
+    </Frame>-->
+    
+    <ContentControl Content="{Binding SelectedViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate x:Key="Test1" x:DataType="viewmodels:CalculatorViewModel">
+                <views:CalculatorPageView/>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
 
 </Page>

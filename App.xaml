@@ -2,6 +2,9 @@
     x:Class="CurrencyTrader.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CurrencyTrader">
+    xmlns:local="using:CurrencyTrader"
+    xmlns:views="using:CurrencyTrader.Views"
+    xmlns:models="using:CurrencyTrader.Models">
 
+    
 </Application>
