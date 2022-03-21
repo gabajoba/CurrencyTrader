@@ -12,13 +12,9 @@
     <!--<Frame>
         <views:CalculatorPageView x:Name="CalculatorPage"/>
     </Frame>-->
-    
-    <ContentControl Content="{Binding SelectedViewModel}">
-        <ContentControl.Resources>
-            <DataTemplate x:Key="Test1" x:DataType="viewmodels:CalculatorViewModel">
-                <views:CalculatorPageView/>
-            </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
+    <Page.DataContext>
+        <viewmodels:MainViewModel/>
+    </Page.DataContext>
+    <ContentControl Content="{Binding SelectedPage}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
 </Page>

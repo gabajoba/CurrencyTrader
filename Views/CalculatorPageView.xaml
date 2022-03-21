@@ -5,9 +5,13 @@
     xmlns:local="using:CurrencyTrader.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:CurrencyTrader.ViewModels"
     mc:Ignorable="d"
     Background="Gray">
     <!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">-->
+    <Page.DataContext>
+        <viewmodels:CalculatorViewModel/>
+    </Page.DataContext>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"></RowDefinition>
@@ -37,19 +41,19 @@
         </Border>
         <Viewbox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox x:Name="TextBoxFirstCurr"                
-                     Text="1.00" 
+                     Text="{Binding FirstValuteValue}" 
                      TextAlignment="Center" 
                      FontWeight="Bold" 
                      BorderThickness="0"
                      HorizontalAlignment="Stretch"
                      HorizontalContentAlignment="Stretch"
                      MinHeight="20"
-                     TextChanged="TextBoxFirstCurr_TextChanged"
+                     BeforeTextChanging="TextBeforeTextChanging"
                      Margin="35,10,35,10" AcceptsReturn="True" RequestedTheme="Default" MaxLength="30"/>
         </Viewbox>
         <Viewbox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox x:Name="TextBoxSecondCurr"                
-                     Text="134.00" 
+                     Text="{Binding SecondValuteValue}" 
                      TextAlignment="Center" 
                      FontWeight="Bold" 
                      BorderThickness="0"
@@ -58,8 +62,8 @@
                      MinHeight="20"
                      Margin="35,10,35,10" 
                      AcceptsReturn="True" 
+                     BeforeTextChanging="TextBeforeTextChanging"
                      RequestedTheme="Default" 
-                     TextChanged="TextBoxSecondCurr_TextChanged"
                      MaxLength="30"/>
         </Viewbox>
         <Viewbox  Grid.Row="2" Grid.ColumnSpan="2" 
@@ -74,7 +78,7 @@
         <Viewbox Grid.Row="3" Grid.Column="0">
             <TextBlock HorizontalAlignment="Stretch" 
                            VerticalAlignment="Center" 
-                           Text="RUB"
+                           Text="{Binding FirstValuteName, Mode=OneWay}"
                            FontWeight="Bold" 
                            MaxLines="1"  
                            Margin="3"
@@ -83,17 +87,27 @@
         <Viewbox Grid.Row="3" Grid.Column="1">
             <TextBlock HorizontalAlignment="Stretch" 
                            VerticalAlignment="Center" 
-                           Text="USD" 
+                           Text="{Binding SecondValuteName, Mode=OneWay}" 
                            FontWeight="Bold" 
                            MaxLines="1" 
                            Margin="3"
                            TextAlignment="Center" />
         </Viewbox>
         <Viewbox Grid.Row="4" Grid.Column="0">
-            <Button Content="Изменить валюту" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button 
+                Command="{Binding ChangeFirstValuteBtnClicked}"
+                Content="Изменить валюту" 
+                Margin="10" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch"/>
         </Viewbox>
         <Viewbox Grid.Row="4" Grid.Column="1">
-            <Button Content="Изменить валюту" Margin="10"/>
+            <Button 
+                Command="{Binding ChangeSecondValuteBtnClicked}"
+                Content="Изменить валюту" 
+                Margin="10" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch"/>
         </Viewbox>
 
     </Grid>

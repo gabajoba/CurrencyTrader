@@ -1,5 +1,4 @@
-﻿using CurrencyTrader.Data;
-using CurrencyTrader.Models;
+﻿using CurrencyTrader.Models;
 using CurrencyTrader.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,18 +22,18 @@ namespace CurrencyTrader.Views
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class CalculatorPageView : Page
+    public sealed partial class ChooseValutePageView : Page
     {
-        public CalculatorPageView()
+        public ChooseValutePageView()
         {
             this.InitializeComponent();
+
+            DataContext = new ChooseValuteViewModel();
         }
 
-        private void TextBeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
-        {
-
-                args.Cancel = args.NewText.Any(c => (!char.IsDigit(c)));
-
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        { 
+            ChooseValuteViewModel.ChooseValute(((sender as ListView).SelectedItem as Valute).CharCode);
         }
     }
 }

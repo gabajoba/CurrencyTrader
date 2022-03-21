@@ -1,24 +1,38 @@
-﻿using CurrencyTrader.Models;
+﻿using CurrencyTrader.Commands;
+using CurrencyTrader.Models;
+using CurrencyTrader.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CurrencyTrader.ViewModels
 {
+    public enum ChoosedValute
+    {
+        First,
+        Second
+    }
     class CalculatorViewModel : BaseViewModel
     {
-        private int firstValuteValue;
-        private int secondValuteValue;
-        private Valute firstValute;
-        private Valute secondValute;
+        public static CalculatorViewModel Instance;
+        private double firstValuteValue;
+        private double secondValuteValue;
+        private string firstValuteName;
+        private string secondValuteName;
+        private static Valute firstValute;
+        private static Valute secondValute;
+        public CalculatorViewModel()
+        {
+            if(Instance == null)
+            {
+                Instance = this;
+            } 
+        }
 
-        public int FirstValuteValue
+        public double FirstValuteValue
         {
             get
             {
-                return firstValuteValue;
+                return Math.Round(firstValuteValue,2);
             }
             set
             {
@@ -26,16 +40,40 @@ namespace CurrencyTrader.ViewModels
                 OnPropertyChanged("FirstValuteValue");
             }
         }
-        public int SecondValuteValue
+        public double SecondValuteValue
         {
             get
             {
-                return secondValuteValue;
+                return Math.Round(secondValuteValue, 2);
             }
             set
             {
                 secondValuteValue = value;
                 OnPropertyChanged("SecondValuteValue");
+            }
+        }
+        public string FirstValuteName
+        {
+            get
+            {
+                return firstValuteName;
+            }
+            set
+            {
+                firstValuteName = value;
+                OnPropertyChanged("FirstValuteName");
+            }
+        }
+        public string SecondValuteName
+        {
+            get
+            {
+                return secondValuteName;
+            }
+            set
+            {
+                secondValuteName = value;               
+                OnPropertyChanged("SecondValuteName");
             }
         }
         public Valute FirstValute
@@ -47,6 +85,8 @@ namespace CurrencyTrader.ViewModels
             set
             {
                 firstValute = value;
+                FirstValuteName = value.CharCode;
+                FirstValuteValue = value.Value;              
                 OnPropertyChanged("FirstValute");
             }
         }
@@ -59,8 +99,38 @@ namespace CurrencyTrader.ViewModels
             set
             {
                 secondValute = value;
+                SecondValuteName = value.CharCode;
+                SecondValuteValue = value.Value;
+
                 OnPropertyChanged("SecondValute");
             }
         }
+
+        public ICommand ChangeFirstValuteBtnClicked
+        {
+            get
+            {
+                return new DelegateCommand(ChangeFirstValute);
+            }
+        }
+        public ICommand ChangeSecondValuteBtnClicked
+        {
+            get
+            {
+                return new DelegateCommand(ChangeSecondValute);
+            }
+        }
+
+        public void ChangeFirstValute()
+        {
+            MainViewModel.Instance.SelectedPage = new ChooseValutePageView();
+            ChooseValuteViewModel.Instance.ChoosedValute = ChoosedValute.First;
+        }
+        public void ChangeSecondValute()
+        {
+            MainViewModel.Instance.SelectedPage = new ChooseValutePageView();
+            ChooseValuteViewModel.Instance.ChoosedValute = ChoosedValute.Second;
+        }
+
     }
 }

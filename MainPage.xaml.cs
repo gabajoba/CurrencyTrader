@@ -1,4 +1,6 @@
-﻿using CurrencyTrader.ViewModels;
+﻿using CurrencyTrader.Data;
+using CurrencyTrader.ViewModels;
+using System;
 using Windows.UI.Xaml.Controls;
 
 
@@ -14,7 +16,6 @@ namespace CurrencyTrader
         public MainPage()
         {
             this.InitializeComponent();
-            DataContext = new MainViewModel();           
         }
     }
 }
